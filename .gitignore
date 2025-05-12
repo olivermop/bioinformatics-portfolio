@@ -1,0 +1,10 @@
+# Ignore large and temporary files
+tmp/
+results/
+*.qza
+*.qzv
+*.fastq.gz
+data/raw/
+data/processed/
+venv/
+.DS_Store
