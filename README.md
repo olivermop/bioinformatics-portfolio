@@ -63,12 +63,49 @@ Located in `scripts/`, these utilities handle:
 
 ## Exercises
 
-Classic algorithm implementations in `exercises/`:
+Hand-coded (and a few extended) bioinformatics algorithms in `exercises/`. Each script is self-contained; where applicable, it exposes a CLI via `argparse` (`--help` available).
 
-* Pattern matching, approximate counting.
-* Clump finding, skew calculation.
-* k-mer neighborhoods, reverse complements.
-* VCF analysis, Hamming distance.
+### String & motif algorithms
+- `hamming_distance.py` — Hamming distance between two strings.
+- `reverse_complement.py` — Reverse complement of a DNA string.
+- `pattern_occurrence_counter.py` — Exact pattern occurrence counting.
+- `patter_matching.py` — Exact pattern matching; returns start indices. *(Suggestion: rename to `pattern_matching.py`)*  
+- `approximate_pattern_count.py` — Counts occurrences allowing up to `d` mismatches.
+- `approximate_pattern_matching.py` — Start indices of approximate matches (≤ `d` mismatches).
+- `d_neighborhood_of_kmer.py` — All k-mers within Hamming distance `d` (the d-neighborhood).
+- `frequent_words_with_mismatches.py` — Most frequent k-mers with mismatches.
+- `frequent_words_with_mismatches_and_reverse_complements.py` — Same, also considering reverse complements.
+- `motif_enumeration.py` — Enumerates shared motifs across strings with ≤ `d` mismatches.
+- `median_string.py` — Finds a “median string” motif minimizing total distance.
+- `profile_most_probable_kmer.py` — Most probable k-mer given a profile (PWM).
+- `profile_probability_tools.py` — Utilities for profiles/probabilities (PWM).
+- `randomized_motif_search.py` — Randomized motif discovery.
+- `gibbs_sampler.py` — Motif discovery via Gibbs sampling.
+- `greedy_motif_search.py` — Greedy motif search.
+- `greedy_motif_search_pseudocounts.py` — Greedy search with pseudocounts (Laplace).
+
+### Genomic signals (skew, clumps, ori)
+- `calculate_skew.py` — Computes GC skew (G−C) across a genome.
+- `minimum_skew.py` — Positions of minimum skew (often near ori).
+- `find_ori.py` — Heuristic ori localization using skew.
+- `clump_finding.py` / `clump_finding2.py` — (k, L, t) clump detection.
+- `expected_kmer_occurrences.py` — Expected k-mer counts under a random model.
+- `estimate_ktl.py` — Estimation/tuning of (k, t, L) parameters for clumps/motifs.
+
+### Sequence, RNA-Seq & variation
+- `sequence_analysis.py` — General sequence analysis utilities.
+- `rna_seq_analysis.py` — Lightweight RNA-Seq pipeline (counts/DE/basic plots).
+- `vcf_analysis.py` — VCF parsing and basic variant summaries.
+- `genetic_variation_analysis.py` — Additional stats/summaries for variation (complements `vcf_analysis.py`).
+
+### Proteins, BLAST & other
+- `protein_translation.py` — DNA/RNA → protein translation.
+- `protein_structure_analysis.py` — Basic structural summaries (e.g., secondary structure counts, lengths).
+- `blast_sequence.py` — Programmatic BLAST of a query sequence (requires proper setup/network).
+
+### Misc
+- `find_hidden_motif.py` — Hidden/shared motif search across multiple strings.
+- `questionnaire1.py` — Guided Q&A/assessment script (useful for quick checks).
 
 Each script includes examples and usage instructions.
 
@@ -76,9 +113,17 @@ Each script includes examples and usage instructions.
 
 Final outputs (plots, tables, reports) are stored in `results/`. Highlights:
 
-* Volcano plots and heatmaps for RNA-Seq.
-* PDB-based secondary structure bar charts.
-* VCF variant classification reports.
+* RNA-Seq: volcano plots, heatmaps, and PCA. *(from `rna_seq_analysis.py`)*
+* Motif discovery: greedy, randomized, and Gibbs samplers — sequence logos and consensus tables. *(from `greedy_motif_search.py`, `greedy_motif_search_pseudocounts.py`, `randomized_motif_search.py`, `gibbs_sampler.py`, `motif_enumeration.py`, `median_string.py`)*
+* PWM/profile-based results: most-probable k-mer tables and profile probability summaries. *(from `profile_most_probable_kmer.py`, `profile_probability_tools.py`)*
+* K-mer analytics: frequent words with mismatches (± reverse complements), d-neighborhood counts, and expected k-mer occurrences. *(from `frequent_words_with_mismatches.py`, `frequent_words_with_mismatches_and_reverse_complements.py`, `d_neighborhood_of_kmer.py`, `expected_kmer_occurrences.py`)*
+* Genomic signals: GC-skew curves, minimum-skew loci and ori candidates; (k,L,t) clump windows and parameter sweeps. *(from `calculate_skew.py`, `minimum_skew.py`, `find_ori.py`, `clump_finding.py`, `clump_finding2.py`, `estimate_ktl.py`)*
+* Pattern matching: exact and approximate match indices and counts. *(from `pattern_occurrence_counter.py`, `patter_matching.py`, `approximate_pattern_count.py`, `approximate_pattern_matching.py`, `hamming_distance.py`, `reverse_complement.py`)*
+* Variation: VCF variant classification, SNV/indel summaries, and basic stats. *(from `vcf_analysis.py`, `genetic_variation_analysis.py`)*
+* Proteins: translation checks and PDB-based secondary-structure bar charts. *(from `protein_translation.py`, `protein_structure_analysis.py`)*
+* BLAST: top-hit tables with accession, identity, coverage, and e-value. *(from `blast_sequence.py`)*
+* General utilities: quick sequence summaries and helpers. *(from `sequence_analysis.py`, `find_hidden_motif.py`, `questionnaire1.py`)*
+
 
 ## License
 
